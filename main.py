@@ -43,8 +43,7 @@ async def get_message(message: types.Message):
         string += f"{commnads[i]}\n"
     await message.reply(f"{string}")
 
-
-
+oleg
 
 
 @dp.message_handler(commands=['primogem'])
