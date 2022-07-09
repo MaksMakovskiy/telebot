@@ -66,9 +66,7 @@ async def get_message(ms: types.Message):
     else:
         if b.newplayerfuch(ms.from_user.id) != True:
             await ms.reply("Вы зарегестрированны на имя " + {ms.from_user.first_name} + "!")
-        elif (ms.text).startswith(commnads) == True:
-            await bot.send_message(chat_id=ms.chat.id,
-            text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
+
 
 
 
