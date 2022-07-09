@@ -1,4 +1,3 @@
-from re import L
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 from database import DataCrude
@@ -44,8 +43,6 @@ async def get_message(message: types.Message):
         string += f"{commnads[i]}\n"
     await message.reply(f"{string}")
 
-def prit():
-    ...
 
 
 @dp.message_handler(commands=['primogem'])
@@ -82,4 +79,3 @@ async def get_message(ms):
 
 
 executor.start_polling(dp)
-
