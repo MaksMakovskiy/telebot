@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:telegbot}/base.db",
+            "name": "base",
+            "group": "databaseforbot"
+        }
+    ]
+}
