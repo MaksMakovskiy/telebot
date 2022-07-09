@@ -50,14 +50,18 @@ async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:
         await bot.send_message(chat_id=ms.chat.id,
           text=( "У " + ms.from_user.first_name + " " + str(b.players[ms.from_user.id]["primogem"]) + " встреч"))
-    
+    elif (ms.text).startswith(commnads) == True:
+            await bot.send_message(chat_id=ms.chat.id,
+            text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
     
 @dp.message_handler(commands=['war'])
 async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:        
         await bot.send_message(chat_id=ms.chat.id,
             text=(warcommand(ms.from_user.first_name))) 
-
+    elif (ms.text).startswith(commnads) == True:
+            await bot.send_message(chat_id=ms.chat.id,
+            text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
 
 @dp.message_handler(commands=['newplayer'])
 async def get_message(ms: types.Message):
@@ -65,8 +69,8 @@ async def get_message(ms: types.Message):
         await ms.reply("Вы уже зарегистрированный игрок!")                
     else:
         if b.newplayerfuch(ms.from_user.id) != True:
-            await ms.reply("Вы зарегестрированны на имя " + {ms.from_user.first_name} + "!")
-
+            await ms.reply("Вы зарегестрированны!")
+        
 
 
 
