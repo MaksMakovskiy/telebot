@@ -30,8 +30,8 @@ class DataCrude():
             return True
         else:
             self.PrintUserToBase(id)
-        
             return False
+
 
     def DoDIctUsers(self):
         self.fether.execute("SELECT * FROM player;")

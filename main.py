@@ -3,13 +3,14 @@ from aiogram.utils import executor
 from database import DataCrude
 import random
 
+
 b = DataCrude()
 b.DoDIctUsers()
 bot = Bot(token='5584354396:AAFs6RqDC3_RfPjeHbUzU6qGIGVVE2qD1n8')
 dp = Dispatcher(bot)
 
-commnads = ("/primogem","/newplayer","/roll","/flip","/war")
 
+commnads = ("/primogem","/newplayer","/roll","/flip","/war")
 
 
 def warcommand(name):
@@ -31,6 +32,7 @@ async def get_message(message: types.Message):
     else:
         await message.reply("Решка")
 
+
 @dp.message_handler(commands=['roll'])
 async def get_message(message: types.Message):
     await message.reply(f"{message.from_user.first_name}: {random.randint(1, 100)}|100")
@@ -44,7 +46,6 @@ async def get_message(message: types.Message):
     await message.reply(f"{string}")
 
 
-
 @dp.message_handler(commands=['primogem'])
 async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:
@@ -54,6 +55,7 @@ async def get_message(ms: types.Message):
             await bot.send_message(chat_id=ms.chat.id,
             text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
     
+
 @dp.message_handler(commands=['war'])
 async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:        
@@ -63,6 +65,7 @@ async def get_message(ms: types.Message):
             await bot.send_message(chat_id=ms.chat.id,
             text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
 
+
 @dp.message_handler(commands=['newplayer'])
 async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:
@@ -71,9 +74,6 @@ async def get_message(ms: types.Message):
         if b.newplayerfuch(ms.from_user.id) != True:
             await ms.reply("Вы зарегестрированны!")
         
-
-
-
 
 @dp.message_handler()
 async def get_message(ms):
