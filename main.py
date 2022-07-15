@@ -10,7 +10,7 @@ bot = Bot(token='5584354396:AAFs6RqDC3_RfPjeHbUzU6qGIGVVE2qD1n8')
 dp = Dispatcher(bot)
 
 
-commnads = ("/primogem","/newplayer","/roll","/flip","/war")
+commands = ("/primogem","/newplayer","/roll","/flip","/war")
 
 
 def warcommand(name):
@@ -40,10 +40,7 @@ async def get_message(message: types.Message):
 
 @dp.message_handler(commands=['gshlist'])
 async def get_message(message: types.Message):
-    string = ""
-    for i in range(len(commnads)):       
-        string += f"{commnads[i]}\n"
-    await message.reply(f"{string}")
+    await message.reply("\n".join(commands))
 
 
 @dp.message_handler(commands=['primogem'])
@@ -51,7 +48,7 @@ async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:
         await bot.send_message(chat_id=ms.chat.id,
           text=( "У " + ms.from_user.first_name + " " + str(b.players[ms.from_user.id]["primogem"]) + " встреч"))
-    elif (ms.text).startswith(commnads) == True:
+    elif (ms.text).startswith(commands) == True:
             await bot.send_message(chat_id=ms.chat.id,
             text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
     
@@ -61,7 +58,7 @@ async def get_message(ms: types.Message):
     if b.message_chek(ms.from_user.id) == True:        
         await bot.send_message(chat_id=ms.chat.id,
             text=(warcommand(ms.from_user.first_name))) 
-    elif (ms.text).startswith(commnads) == True:
+    elif (ms.text).startswith(commands) == True:
             await bot.send_message(chat_id=ms.chat.id,
             text=("Вас нету в списках игроков! Хотите зарегестрироваться? /newplayer"))
 
