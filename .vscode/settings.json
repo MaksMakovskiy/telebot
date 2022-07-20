@@ -3,9 +3,10 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "database": "${workspaceFolder:telegbot}/base.db",
-            "name": "base",
-            "group": "databaseforbot"
+            "database": "${workspaceFolder:telebot}/base.db",
+            "name": "asd",
+            "group": "asd"
         }
-    ]
+    ],
+    "sqltools.useNodeRuntime": true
 }
