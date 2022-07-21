@@ -1,7 +1,6 @@
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 from database import DataCrude
-import random
 
 
 b = DataCrude()
@@ -73,3 +72,6 @@ async def get_message(ms):
 
 
 executor.start_polling(dp)
+
+
+#олег крутой228
