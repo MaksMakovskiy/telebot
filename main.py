@@ -74,4 +74,3 @@ async def get_message(ms):
 executor.start_polling(dp)
 
 
-#олег крутой228
