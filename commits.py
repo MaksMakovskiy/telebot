@@ -28,16 +28,20 @@ def tru_month(
 def info(path="", path2=""):
     os.system(f"cd {path2} && git fetch && git pull")
     g = git.Git(path)
-    loginfo = (g.log("--since=2020-10-21")).split()
+    loginfo = (g.log()).split()
     return loginfo
 
 
-def check_commits(today=str(tm.day), month=tru_month(), loginfo="", commits=0):
+def check_commits(
+    today=str(tm.day), month=tru_month(), year=str(tm.year), loginfo="", commits=0
+):
     for i in range(len(loginfo)):
         if loginfo[i] == "Date:":
-            if loginfo[i + 2] == month:
-                if loginfo[i + 3] == today:
-                    commits += 1
+            if loginfo[i + 5] == year:
+                if loginfo[i + 2] == month:
+                    if loginfo[i + 3] == today:
+                        print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
+                        commits += 1
     return commits
 
 
