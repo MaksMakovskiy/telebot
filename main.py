@@ -36,7 +36,7 @@ async def wait_until(requested_time: time) -> None:
 
 @dp.message_handler(commands="start")
 async def message(ms):
-    print(ms.chat.id)
+    # print(ms.chat.id)
     if ms["from"].id in [1109272594, 323979922]:
         while True:
             await wait_until(time(hour=20))
