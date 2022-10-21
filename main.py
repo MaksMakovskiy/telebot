@@ -42,7 +42,7 @@ async def message(ms):
         while True:
             await wait_until(time(hour=20))
             # datetime.now() + timedelta(seconds=5)).time()
-            await bot.send_message(chat_id=-1001794521674, text=Messagetext)
+            await bot.send_message(chat_id=chat_id, text=Messagetext)
 
 
 if __name__ == "__main__":
