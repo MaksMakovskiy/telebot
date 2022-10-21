@@ -18,7 +18,7 @@ chat_id = -1001562292311
 
 # 1109272594 - Maks
 # 323979922 - Pasha
-Messagetext = f"{check_commits(loginfo=info(path))} commits were done!"
+Messagetext = f"{check_commits(loginfo=info(path, path2))} commits were done!"
 
 
 # @dp.message_handler()
@@ -40,9 +40,8 @@ async def message(ms):
     print(ms.chat.id)
     if ms["from"].id in [1109272594, 323979922]:
         while True:
-            await wait_until(
-                (time(hour=20))
-            )  # (datetime.now() + timedelta(seconds=5)).time()
+            await wait_until(time(hour=20))
+            # datetime.now() + timedelta(seconds=5)).time()
             await bot.send_message(chat_id=-1001794521674, text=Messagetext)
 
 
