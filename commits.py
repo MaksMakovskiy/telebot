@@ -43,7 +43,7 @@ def check_commits(
             if loginfo[i + 5] == year:
                 if loginfo[i + 2] == month:
                     if loginfo[i + 3] == today:
-                        print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
+                        # print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
                         commits += 1
     return commits
 
