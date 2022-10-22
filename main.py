@@ -41,11 +41,11 @@ async def message(ms):
         while True:
             await wait_until(time(hour=20))
             # datetime.now() + timedelta(seconds=5)).time()
-            commit_info = check_commits(loginfo=info(path, path2))
+            commit_count = check_commits(loginfo=info(path, path2))
             if info == 0:
-                Message_text = f"{commit_info} commits were done!:C"
+                Message_text = f"{commit_count} commits were done!:C"
             else:
-                Message_text = f"{commit_info} commits were done!:D"
+                Message_text = f"{commit_count} commits were done!:D"
             await bot.send_message(chat_id=chat_id, text=Message_text)
 
 
