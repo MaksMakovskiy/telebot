@@ -39,12 +39,14 @@ def check_commits(
     today=str(tm.day), month=tru_month(), year=str(tm.year), loginfo="", commits=0
 ):
     for i in range(len(loginfo)):
-        if loginfo[i] == "Date:":
-            if loginfo[i + 5] == year:
-                if loginfo[i + 2] == month:
-                    if loginfo[i + 3] == today:
-                        # print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
-                        commits += 1
+        if (
+            loginfo[i] == "Date:"
+            and loginfo[i + 5] == year
+            and loginfo[i + 2] == month
+            and loginfo[i + 3] == today
+        ):
+            # print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
+            commits += 1
     return commits
 
 
