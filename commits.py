@@ -4,9 +4,6 @@ import os
 
 tm = datetime.datetime.today()
 
-path = "C:/scripts/BineWizards/unity-game"
-path2 = "../frontend"
-
 
 def tru_month(
     months={
@@ -48,8 +45,3 @@ def check_commits(
             # print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
             commits += 1
     return commits
-
-
-if __name__ == "__main__":
-    print(info())
-    print(check_commits(loginfo=info(path=path)))
