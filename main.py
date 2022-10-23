@@ -4,20 +4,24 @@ from aiogram.utils import executor
 import asyncio
 from datetime import datetime, time, timedelta
 from commits import check_commits, tru_month, info
+from os import getenv
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
 
 tm = datetime.today()
 
-path = "C:/scripts/BineWizards/unity-game"  # for git
-path2 = "../frontend"  # for console
+path = getenv("PAHT")  # for git
+path2 = getenv("PATH2")  # for console
 
-
-bot = Bot(token="5584354396:AAFs6RqDC3_RfPjeHbUzU6qGIGVVE2qD1n8")
+bot = Bot(token=getenv("TOKEN"))
 dp = Dispatcher(bot)
-# chat_id = -1001794521674
-chat_id = -1001562292311
 
-# 1109272594 - Maks
-# 323979922 - Pasha
+chat_id = int(getenv("TEST_CHAT_ID"))
+
+admin_users = getenv("ADMIN_USERS").split()
+admin_users = [int(x) for x in admin_users]
 
 
 # @dp.message_handler()
@@ -37,7 +41,7 @@ async def wait_until(requested_time: time) -> None:
 @dp.message_handler(commands="start")
 async def message(ms):
     # print(ms.chat.id)
-    if ms["from"].id in [1109272594, 323979922]:
+    if ms["from"].id in admin_users:
         while True:
             await wait_until(time(hour=20))
             # datetime.now() + timedelta(seconds=5)).time()
