@@ -35,16 +35,27 @@ async def wait_until(requested_time: time) -> None:
     if time_to_wait < timedelta(seconds=0):
         time_to_wait += timedelta(days=1)
 
+    print(f"Waiting untill {requested_time} ({time_to_wait} remaining)")
     await asyncio.sleep(time_to_wait.total_seconds())
+
+
+started = False
 
 
 @dp.message_handler(commands="start")
 async def message(ms):
-    # print(ms.chat.id)
+    global started
+
+    print(ms)
+    if started:
+        return
+
     if ms["from"].id in admin_users:
+        started = True
         while True:
-            await wait_until(time(hour=20))
-            # datetime.now() + timedelta(seconds=5)).time()
+            await wait_until(time(hour=12))
+            # await wait_until((datetime.now() + timedelta(seconds=5)).time())
+
             commit_count = check_commits(loginfo=info(path, path2))
             if info == 0:
                 Message_text = f"{commit_count} commits were done!:C"
