@@ -57,7 +57,7 @@ async def message(ms):
             # await wait_until((datetime.now() + timedelta(seconds=5)).time())
 
             commit_count = check_commits(loginfo=info(path, path2))
-            if info == 0:
+            if commit_count == 0:
                 Message_text = f"{commit_count} commits were done!:C"
             else:
                 Message_text = f"{commit_count} commits were done!:D"
