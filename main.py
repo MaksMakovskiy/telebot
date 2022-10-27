@@ -9,6 +9,7 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
+time_deletion = int(getenv("TIME"))
 
 tm = datetime.today()
 
@@ -18,7 +19,7 @@ path2 = getenv("PATH2")  # for console
 bot = Bot(token=getenv("TOKEN"))
 dp = Dispatcher(bot)
 
-chat_id = int(getenv("CHAT_ID"))
+chat_id = int(getenv("TEST_CHAT_ID"))
 
 admin_users = getenv("ADMIN_USERS").split()
 admin_users = [int(x) for x in admin_users]
@@ -39,7 +40,7 @@ async def wait_until(requested_time: time) -> None:
     await asyncio.sleep(time_to_wait.total_seconds())
 
 
-started = False
+# started = False
 
 
 @dp.message_handler(commands="start")
@@ -65,4 +66,4 @@ async def message(ms):
 
 
 if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp)
