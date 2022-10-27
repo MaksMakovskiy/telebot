@@ -40,28 +40,44 @@ async def wait_until(requested_time: time) -> None:
     await asyncio.sleep(time_to_wait.total_seconds())
 
 
-# started = False
+started = False
 
 
 @dp.message_handler(commands="start")
 async def message(ms):
     global started
 
-    print(ms)
+    # print(ms)
     if started:
         return
 
     if ms["from"].id in admin_users:
         started = True
         while True:
-            await wait_until(time(hour=12))
+            await wait_until(time(hour=time_deletion))
             # await wait_until((datetime.now() + timedelta(seconds=5)).time())
 
-            commit_count = check_commits(loginfo=info(path, path2))
+            commit_count = check_commits(
+                loginfo=info(path, path2), time_del=time_deletion
+            )[1]
+            author_count = check_commits(
+                loginfo=info(path, path2), time_del=time_deletion
+            )[0]
+            # print(check_commits(loginfo=info(path, path2)))
+            # print(author_count)
             if commit_count == 0:
-                Message_text = f"{commit_count} commits were done!:C"
+                Message_text = f"0 commits were done!:C"
             else:
-                Message_text = f"{commit_count} commits were done!:D"
+                Message_text = f"{commit_count} commits were done!:D\n"
+                for i in author_count:
+                    # print(author_count)
+                    if i == "vons_s" and author_count["vons_s"] == 0:
+                        Message_text += f"\nVons, do something finally, please"
+                    elif author_count[i] == 1:
+                        Message_text += f"\n{i} did 1 commit"
+                    elif author_count[i] > 1 or author_count[i] == 0:
+                        Message_text += f"\n{i} did {author_count[i]} commits"
+
             await bot.send_message(chat_id=chat_id, text=Message_text)
 
 
