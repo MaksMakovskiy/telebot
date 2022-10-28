@@ -7,26 +7,6 @@ from pytz import timezone
 tm = datetime.datetime.today()
 
 
-def tru_month(
-    months={
-        "1": "Jan",
-        "2": "Feb",
-        "3": "Mar",
-        "4": "Apr",
-        "5": "May",
-        "6": "Jun",
-        "7": "Jul",
-        "8": "Aug",
-        "9": "Sep",
-        "10": "Oct",
-        "11": "Nov",
-        "12": "Dec",
-    },
-    month=str(tm.month),
-):
-    return months[month]
-
-
 def info(path="", path2=""):
     os.system(f"cd {path2} && git fetch && git pull")
     g = git.Git(path)
@@ -46,10 +26,11 @@ def check_commits(
 
     for i in range(len(loginfo)):
         if loginfo[i] == "Date:":
-            for b in range(5):
-                times += f"{loginfo[(i+2)+b]} "
             times = (
-                datetime.datetime.strptime(times, f"%b %d %H:%M:%S %Y %z ")
+                datetime.datetime.strptime(
+                    " ".join(loginfo[i + 2 : i + 7]),
+                    f"%b %d %H:%M:%S %Y %z",  # С любовью от паши
+                )
             ).astimezone(timezone("UTC"))
 
             if (datetime.datetime.now(timezone("UTC")) - times).days < 1:

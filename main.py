@@ -4,9 +4,12 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import asyncio
 from datetime import datetime, time, timedelta
-from commits import check_commits, tru_month, info
-from os import getenv
+
+from click import command
+from commits import check_commits, info
+from os import getenv, listdir
 from dotenv import load_dotenv, find_dotenv
+from random import choice
 
 load_dotenv(find_dotenv())
 
@@ -75,7 +78,12 @@ async def message(ms):
                         Message_text += f"\n{author} did 1 commit"
                     elif count > 1 or count == 0:
                         Message_text += f"\n{author} did {count} commits"
-
+                if commit_count > 10:
+                    # pht = open(f"./img/{choice(listdir('./img'))}", "rb")
+                    await bot.send_photo(
+                        chat_id=chat_id,
+                        photo=open(f"./img/{choice(listdir('./img'))}", "rb"),
+                    )
             await bot.send_message(chat_id=chat_id, text=Message_text)
 
 
