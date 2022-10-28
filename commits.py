@@ -2,6 +2,8 @@ import git
 import datetime
 import os
 
+from pytz import timezone
+
 tm = datetime.datetime.today()
 
 
@@ -33,51 +35,30 @@ def info(path="", path2=""):
 
 
 def check_commits(
-    today=str(tm.day),
-    month=tru_month(),
-    year=str(tm.year),
     loginfo="",
     commits=0,
     dictionary_of_commits={},
-    time_del=0,
+    times="",
 ):
     # print(loginfo)
     dictionary_of_commits = {}
+    # int(((loginfo[i + 4]).split(":"))[0])
+
     for i in range(len(loginfo)):
-        if (
-            loginfo[i] == "Date:"
-            and loginfo[i + 5] == year
-            and loginfo[i + 2] == month
-            and loginfo[i + 3] == today
-        ):
-            # print(loginfo[i + 2], loginfo[i + 3], loginfo[i + 5])
-            if loginfo[i - 2] in dictionary_of_commits.keys():
-                dictionary_of_commits[loginfo[i - 2]] += 1
-            else:
-                dictionary_of_commits[loginfo[i - 2]] = 1
-            commits += 1
-            print(
-                int(((loginfo[i + 4]).split(":"))[0]),
-                type(int(((loginfo[i + 4]).split(":"))[0])),
-            )
-        if (
-            loginfo[i] == "Date:"
-            and loginfo[i + 5]
-            == str((datetime.datetime.today() - datetime.timedelta(days=1)).day)
-            and loginfo[i + 2]
-            == tru_month(
-                month=((datetime.datetime.today() - datetime.timedelta(days=1)).month)
-            )
-            and loginfo[i + 3]
-            == str((datetime.datetime.today() - datetime.timedelta(days=1)).year)
-            and int(((loginfo[i + 4]).split(":"))[0]) > time_del
-        ):
-            print(str((datetime.datetime.today() - datetime.timedelta(days=1)).day))
-            if loginfo[i - 2] in dictionary_of_commits.keys():
-                dictionary_of_commits[loginfo[i - 2]] += 1
-            else:
-                dictionary_of_commits[loginfo[i - 2]] = 1
-            commits += 1
+        if loginfo[i] == "Date:":
+            for b in range(5):
+                times += f"{loginfo[(i+2)+b]} "
+            times = (
+                datetime.datetime.strptime(times, f"%b %d %H:%M:%S %Y %z ")
+            ).astimezone(timezone("UTC"))
+
+            if (datetime.datetime.now(timezone("UTC")) - times).days < 1:
+                if loginfo[i - 2] in dictionary_of_commits.keys():
+                    dictionary_of_commits[loginfo[i - 2]] += 1
+                else:
+                    dictionary_of_commits[loginfo[i - 2]] = 1
+                commits += 1
+        times = ""
 
     if "vons_s" not in dictionary_of_commits.keys():
         dictionary_of_commits["vons_s"] = 0

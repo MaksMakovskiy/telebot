@@ -1,3 +1,4 @@
+from itertools import count
 from aiogram import Bot
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
@@ -66,17 +67,18 @@ async def message(ms):
             # print(check_commits(loginfo=info(path, path2)))
             # print(author_count)
             if commit_count == 0:
-                Message_text = f"0 commits were done!:C"
+                Message_text = f"Today, 0 commits were done!:C"
             else:
-                Message_text = f"{commit_count} commits were done!:D\n"
-                for i in author_count:
+                Message_text = f"Today, {commit_count} commits were done!:D\n"
+                # for i in author_count:
+                for author, count in author_count.items():
                     # print(author_count)
-                    if i == "vons_s" and author_count["vons_s"] == 0:
+                    if author == "vons_s" and count == 0:
                         Message_text += f"\nVons, do something finally, please"
-                    elif author_count[i] == 1:
-                        Message_text += f"\n{i} did 1 commit"
-                    elif author_count[i] > 1 or author_count[i] == 0:
-                        Message_text += f"\n{i} did {author_count[i]} commits"
+                    elif count == 1:
+                        Message_text += f"\n{author} did 1 commit"
+                    elif count > 1 or count == 0:
+                        Message_text += f"\n{author} did {count} commits"
 
             await bot.send_message(chat_id=chat_id, text=Message_text)
 
