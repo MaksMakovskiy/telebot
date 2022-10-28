@@ -76,13 +76,14 @@ async def message(ms):
                         Message_text += f"\n{author} did 1 commit"
                     elif count > 1 or count == 0:
                         Message_text += f"\n{author} did {count} commits"
-                if commit_count > 10:
-                    # pht = open(f"./img/{choice(listdir('./img'))}", "rb")
-                    await bot.send_photo(
-                        chat_id=chat_id,
-                        photo=open(f"./img/{choice(listdir('./img'))}", "rb"),
-                    )
+
             await bot.send_message(chat_id=chat_id, text=Message_text)
+            if commit_count > 10:
+                # pht = open(f"./img/{choice(listdir('./img'))}", "rb")
+                await bot.send_photo(
+                    chat_id=chat_id,
+                    photo=open(f"./img/{choice(listdir('./img'))}", "rb"),
+                )
 
 
 if __name__ == "__main__":
