@@ -1,11 +1,9 @@
-from itertools import count
 from aiogram import Bot
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import asyncio
 from datetime import datetime, time, timedelta
 
-from click import command
 from commits import check_commits, info
 from os import getenv, listdir
 from dotenv import load_dotenv, find_dotenv
