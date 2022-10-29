@@ -21,7 +21,7 @@ path2 = getenv("PATH2")  # for console
 bot = Bot(token=getenv("TOKEN"))
 dp = Dispatcher(bot)
 
-chat_id = int(getenv("TEST_CHAT_ID"))
+chat_id = int(getenv("CHAT_ID"))
 
 admin_users = getenv("ADMIN_USERS").split()
 admin_users = [int(x) for x in admin_users]
