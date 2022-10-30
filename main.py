@@ -73,8 +73,12 @@ async def message(ms):
                         Message_text += f"\nVons, do something finally, please"
                     elif count == 1:
                         Message_text += f"\n{author} did 1 commit"
+                        if len(author.split()) > 1:
+                            Message_text += f"\n{author}did 1 commit"
                     elif count > 1 or count == 0:
                         Message_text += f"\n{author} did {count} commits"
+                        if len(author.split()) > 1:
+                            Message_text += f"\n{author}did 1 commits"
 
             await bot.send_message(chat_id=chat_id, text=Message_text)
             if commit_count > 10:
