@@ -15,8 +15,7 @@ time_deletion = int(getenv("TIME"))
 
 tm = datetime.today()
 
-path = getenv("PAHT")  # for git
-path2 = getenv("PATH2")  # for console
+path = getenv("PATH_INFO")
 
 bot = Bot(token=getenv("TOKEN"))
 dp = Dispatcher(bot)
@@ -59,8 +58,8 @@ async def message(ms):
             await wait_until(time(hour=time_deletion))
             # await wait_until((datetime.now() + timedelta(seconds=5)).time())
 
-            commit_count = check_commits(loginfo=info(path, path2))[1]
-            author_count = check_commits(loginfo=info(path, path2))[0]
+            commit_count = check_commits(loginfo=info(path))[1]
+            author_count = check_commits(loginfo=info(path))[0]
             # print(check_commits(loginfo=info(path, path2)))
             # print(author_count)
             if commit_count == 0:

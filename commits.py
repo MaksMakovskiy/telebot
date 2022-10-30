@@ -7,9 +7,10 @@ from pytz import timezone
 tm = datetime.datetime.today()
 
 
-def info(path="", path2=""):
-    os.system(f"cd {path2} && git fetch && git pull")
-    g = git.Git(path)
+def info(path=""):
+    os.system(f"cd {path} && git fetch && git pull")
+    g = git.Git(working_dir=path)
+    print(g.log())
     loginfo = (g.log()).split()
     return loginfo
 
@@ -32,7 +33,6 @@ def check_commits(
                     f"%b %d %H:%M:%S %Y %z",  # С любовью от паши
                 )
             ).astimezone(timezone("UTC"))
-
             if (datetime.datetime.now(timezone("UTC")) - times).days < 1:
                 if loginfo[i - 2] in dictionary_of_commits.keys():
                     dictionary_of_commits[loginfo[i - 2]] += 1
