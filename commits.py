@@ -39,7 +39,6 @@ def check_commits(loginfo="", commits=0, dictionary_of_commits={}, times="", nam
                     count_names = []
                     while loginfo[i - (2 + ct)] != "Author:":
                         if loginfo[i - (2 + ct)] != "Author:":
-                            print(loginfo[i - (2 + ct)])
                             count_names.append(loginfo[i - (2 + ct)])
                         ct += 1
                     for f in range(len(count_names)):
