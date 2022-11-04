@@ -57,5 +57,16 @@ def check_commits(loginfo="", commits=0, dictionary_of_commits={}, times="", nam
     return dictionary_of_commits, commits
 
 
+def all_commits(dictrion={}, paths=[], allcount=0):
+    for pt in paths:
+        if pt.split("/")[-1] in dictrion.keys():
+            dictrion[pt.split("/")[-1]] += check_commits(info(pt))
+        else:
+            dictrion[pt.split("/")[-1]] = check_commits(info(pt))
+        allcount += check_commits(info(pt))[1]
+
+    return dictrion, allcount
+
+
 if __name__ == "__main__":
     ...
