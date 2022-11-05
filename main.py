@@ -71,25 +71,15 @@ async def message(ms):
                 else:
                     if i[1] != 0:
                         Message_text += (
-                            f"\n\n    In the repository '{groop}' was done {i[1]}:"
-                        )
-                    else:
-                        Message_text += (
-                            f"\n\n    In the repository '{groop}' was done nothing"
+                            f"\n\n\t{groop} - {i[1]} commit{'s' if count > 1 else ''}:"
                         )
                     for author, count in i[0].items():
                         if author == "vons_s" and count == 0:
-                            addept = f"\n\n    Vons, do something finally, please"
-                        elif count == 1:
-                            Message_text += f"\n        {author} did 1 commit"
-                            if len(author.split()) > 1:
-                                Message_text += f"\n        {author}did 1 commit"
-                        elif count > 1 or count == 0:
-                            Message_text += f"\n        {author} did {count} commits"
-                            if len(author.split()) > 1:
-                                Message_text += f"\n        {author}did 1 commits"
-            Message_text += addept
+                            addept = f"\n\n\tVons, do something finally, please"
+                        else:
+                            Message_text += f"\n\t\t{author}{'' if len(author.split()) > 1 else ' '}did {count} commit{'s' if count > 1 else ''}"
 
+            Message_text += addept
             await bot.send_message(chat_id=chat_id, text=Message_text)
             if commit_count > 10:
                 # pht = open(f"./img/{choice(listdir('./img'))}", "rb")
