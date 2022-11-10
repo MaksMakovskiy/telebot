@@ -13,7 +13,7 @@ build: ## Build image
 
 .PHONY: run
 run: build ## Run app
-	@ docker run -d -v /app/dev-layout/bine-frontend:/app/dev-layout/bine-frontend frontend-telebot:latest
+	@ docker run -d -v /app/dev-layout:/app/dev-layout -v /root/.git-credentials:/root/.git-credentials -v /root/.gitconfig:/root/.gitconfig -v /root/.ssh:/root/.ssh frontend-telebot:latest
 
 
 #

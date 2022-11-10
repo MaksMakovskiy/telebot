@@ -15,7 +15,7 @@ time_deletion = int(getenv("TIME"))
 
 tm = datetime.today()
 
-path = getenv("PATH_INFO")
+path = getenv("PATH_INFO").split(",")
 
 bot = Bot(token=getenv("TOKEN"))
 dp = Dispatcher(bot)
@@ -56,7 +56,7 @@ async def message(ms):
         started = True
         while True:
             await wait_until(time(hour=time_deletion))
-            # await wait_until((datetime.now() + timedelta(seconds=5)).time())
+            # await wait_until((datetime.now() + timedelta(seconds=15)).time())
 
             comm = all_commits(paths=path)
             commits = comm[0]
@@ -71,7 +71,7 @@ async def message(ms):
                 else:
                     if i[1] != 0:
                         Message_text += (
-                            f"\n\n\t{groop} - {i[1]} commit{'s' if count > 1 else ''}:"
+                            f"\n\n\t{groop} - {i[1]} commit{'s' if i[1] > 1 else ''}:"
                         )
                     for author, count in i[0].items():
                         if author == "vons_s" and count == 0:
