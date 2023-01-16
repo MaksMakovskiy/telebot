@@ -14,9 +14,11 @@ def info(path=""):
     return loginfo
 
 
-def check_commits(loginfo="", commits=0, dictionary_of_commits={}, times="", name=""):
+def check_commits(loginfo=""):
     # print(loginfo)
-    dictionary_of_commits = {}
+    commits = 0
+    name = ""
+    dictionary_of_commits: dict[str, int] = {}
     # int(((loginfo[i + 4]).split(":"))[0])
 
     for i in range(len(loginfo)):
@@ -51,21 +53,20 @@ def check_commits(loginfo="", commits=0, dictionary_of_commits={}, times="", nam
                     name = ""
 
         times = ""
-
-    if "vons_s" not in dictionary_of_commits.keys():
-        dictionary_of_commits["vons_s"] = 0
     return dictionary_of_commits, commits
 
 
-def all_commits(dictrion={}, paths=[], allcount=0):
-    for pt in paths:
-        if pt.split("/")[-1] in dictrion.keys():
-            dictrion[pt.split("/")[-1]] += check_commits(info(pt))
-        else:
-            dictrion[pt.split("/")[-1]] = check_commits(info(pt))
-        allcount += check_commits(info(pt))[1]
+def all_commits(paths: set[str]):
+    allcount = 0
+    result: dict[str, dict[str, int]] = {}
 
-    return dictrion, allcount
+    for pt in paths:
+        repo_name = pt.split("/")[-1]
+        commit_data, commit_count = check_commits(info(pt))
+        result[repo_name] = commit_data
+        allcount += commit_count
+
+    return result, allcount
 
 
 if __name__ == "__main__":
